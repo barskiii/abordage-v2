@@ -1,19 +1,21 @@
 import { AiOutlineMenu } from "react-icons/ai"
 import { ImCross } from "react-icons/im"
-import {useEffect, useState} from "react"
+import {HtmlHTMLAttributes, useEffect, useRef, useState} from "react"
 function Hero() {
     const [modalMenuOn, setModalMenuOn] = useState<Boolean>(false)    
-    const [modalOffScreenStyle, setModalOffScreenStyle] = useState<string>('opacity-100') 
-
-    const offScreenMenuStyle = "translate-x-[80vw] opacity-0"
+    const [modalOffScreenStyle, setModalOffScreenStyle] = useState<string>('') 
+    // Using seperate opacity state to prevent initial loading popup
+    const [opacityModal, setOpacityModal] = useState('')
+    
+    const offScreenMenuStyle = "translate-x-[80vw]"
 
     useEffect(() => {
         if (modalMenuOn) {
-            console.log('modalmenuon')
-            setModalOffScreenStyle('opacity-100')
+            setModalOffScreenStyle('')
+            setOpacityModal("10")
         } else {
-            console.log('modalmenuoff')
             setModalOffScreenStyle(offScreenMenuStyle)
+            setOpacityModal('')
         }
     }, [modalMenuOn])
 
@@ -30,7 +32,7 @@ function Hero() {
 
     return (
     <>
-    <div className={`fixed top-0 right-0 z-10 transition-all duration-700 ease-out ${modalOffScreenStyle}`}>
+    <div className={`fixed top-0 right-0 z-10 transition-all duration-700 ease-out opacity-${opacityModal}0 ${modalOffScreenStyle}`}>
         <div className="relative w-[80vw] h-[100vh] ">
                 {/* Blur background */}
             <div className="w-[100%] h-[100%] z-10 absolute top-0 left-0 bg-slate-300/30 "></div>
