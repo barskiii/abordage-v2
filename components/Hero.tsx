@@ -1,21 +1,17 @@
 import { AiOutlineMenu } from "react-icons/ai"
 import { ImCross } from "react-icons/im"
-import {HtmlHTMLAttributes, useEffect, useRef, useState} from "react"
+import { useEffect, useState} from "react"
 function Hero() {
     const [modalMenuOn, setModalMenuOn] = useState<Boolean>(false)    
     const [modalOffScreenStyle, setModalOffScreenStyle] = useState<string>('') 
-    // Using seperate opacity state to prevent initial loading popup
-    const [opacityModal, setOpacityModal] = useState('')
     
-    const offScreenMenuStyle = "translate-x-[80vw]"
-
+    const offScreenMenuStyle = "modal-show"
+    
     useEffect(() => {
         if (modalMenuOn) {
-            setModalOffScreenStyle('')
-            setOpacityModal("10")
-        } else {
             setModalOffScreenStyle(offScreenMenuStyle)
-            setOpacityModal('')
+        } else {
+            setModalOffScreenStyle('')
         }
     }, [modalMenuOn])
 
@@ -32,7 +28,7 @@ function Hero() {
 
     return (
     <>
-    <div className={`fixed top-0 right-0 z-10 transition-all duration-700 ease-out opacity-${opacityModal}0 ${modalOffScreenStyle}`}>
+    <div className={`fixed top-0 right-0 z-10 transition-all duration-700 ease-out opacity-0 translate-x-[80vw] ${modalOffScreenStyle}`}>
         <div className="relative w-[80vw] h-[100vh] ">
                 {/* Blur background */}
             <div className="w-[100%] h-[100%] z-10 absolute top-0 left-0 bg-slate-300/30 "></div>
@@ -97,10 +93,10 @@ nizom usluga poboljša i ubrza Vaše poslovanje.</p>
 
                     <div className="h-[30%] w-[100%] flex flex-row space-x-2">
                         <div>
-                            <button className="font-[550] bg-[#60E1CB] px-8 py-2 rounded-full text-white cta-button">Započnite</button>
+                            <button className="font-[550] hover-button bg-[#60E1CB] px-8 py-2 transition-all duration-150 ease-in-out rounded-full text-white cta-button z-50">Započnite</button>
                         </div>
                         <div>
-                            <button className="font-[550] bg-white px-8 py-2 rounded-full border border-gray-400 border-solid text-[#60E1CB] block-inline">Kontaktirajte nas</button>
+                            <button className="font-[550] hover-button bg-white px-8 py-2 transition-all duration-150 ease-in-out rounded-full border border-gray-400 border-solid text-[#60E1CB] block-inline">Kontaktirajte nas</button>
                         </div>
                     </div>
                 </div>
@@ -108,13 +104,13 @@ nizom usluga poboljša i ubrza Vaše poslovanje.</p>
                 {/* Image */}
                 <div className="md:w-[50%] md:h-[100%] h-[50%] w-[100%] justify-center items-center overflow-hidden relative">
                     <div className="absolute top-0 right-0 -mr-8 -mt-12 md:block">
-                        <img src="/circle-light.svg" alt="circle" className="w-[300px] h-[300px]" />
+                        <img src="/circle-light.svg" alt="circle" className="w-[300px] h-[300px] z-0" />
                     </div>
                     <img src="/hero-1.png" alt="Hero" className="md:w-[100%] md:h-auto h-[100%] w-auto md:mt-[-28px]"/>
                 </div>
             </div>
         </div>
-        <div className="absolute bottom-0 left-0 -ml-5 -mb-0 md:block hidden">
+        <div className="absolute bottom-0 left-0 -ml-5 -mb-0 hidden z-0">
             <img src="/circle-light.svg" alt="circle" className="w-[300px] h-[300px]" />
         </div>
     </section>
